@@ -2,6 +2,7 @@
   <main class="page">
     <slot name="top" />
     <Breadcrumbs />
+    <TaskCompletionSurveyBanner project="filecoin-docs" />
     <Content v-if="!isHome" class="theme-default-content" />
     <Home v-else-if="isHome" />
     <div class="content-footer" v-if="!isContentStatus && !isHome">
@@ -26,6 +27,7 @@
 import PageEdit from '@parent-theme/components/PageEdit.vue'
 import PageNav from '@parent-theme/components/PageNav.vue'
 
+import TaskCompletionSurveyBanner from '@carsy/task-completion-survey-banner/src/index.vue'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Feedback from './Feedback.vue'
 import LegacyCallout from './LegacyCallout.vue'
@@ -43,7 +45,8 @@ export default {
     LegacyCallout,
     Analytics,
     ScrollPatch,
-    Home
+    Home,
+    TaskCompletionSurveyBanner
   },
   props: ['sidebarItems'],
   computed: {
@@ -104,6 +107,24 @@ export default {
 
 .content-feedback {
   padding: 0 2rem;
+}
+
+#pl--task-completion-survey-banner {
+  --margin: 2rem 1rem 0rem 1rem;
+
+  --color: rgba(0, 0, 0, 0.8);
+  --border-radius: 0;
+  --background: #e9f4ff;
+  --cta-background: #0090ff;
+  --cta-hover-background: #0070dd;
+  --cta-color: #fff;
+  
+  max-width: 740px;
+}
+
+.breadcrumbs.fixed + #pl--task-completion-survey-banner {
+  --margin: 1rem 1rem 0rem 1rem;
+  padding: 7rem 0 0 0;
 }
 
 @media (min-width: $MQMobile) {
