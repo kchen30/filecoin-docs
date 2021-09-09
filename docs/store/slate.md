@@ -8,6 +8,8 @@ breadcrumb: ''
 
 {{ $frontmatter.description }} It is the first open-source file storage application designed to encourage collaboration and research across a distributed network. Slate's creation is a first step towards enabling a thriving network for data storage and transactions powered by IPFS, Filecoin, and Textile that is open and usable for everyone.
 
+Slate 是一个建立在 Filecoin 之上的开源存储系统。 它是第一个旨在鼓励跨分布式网络的协作和研究的开源文件存储应用程序。 Slate 的创建是迈向由 IPFS、Filecoin 和 Textile 提供支持的繁荣的数据存储和交易网络的第一步，该网络对每个人都是开放和可用的。
+
 You can try out Slate at [slate.host](https://slate.host). Early members get 50GB of free storage!
 
 <center>

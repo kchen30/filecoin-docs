@@ -66,15 +66,15 @@ module.exports = {
         sidebar: {
           '/get-started/': [
             {
-              title: 'Store and retrieve',
+              title: 'Store and retrieve（数据存取）',
               path: '/get-started/store-and-retrieve/',
               sidebarDepth: 1,
               collapsable: true,
               children: [
-                ['/get-started/store-and-retrieve/', 'Start here'],
-                ['/get-started/store-and-retrieve/set-up', 'Set up'],
-                ['/get-started/store-and-retrieve/store-data', 'Store data'],
-                ['/get-started/store-and-retrieve/retrieve-data', 'Retrieve data']
+                ['/get-started/store-and-retrieve/', 'Start here（开始）'],
+                ['/get-started/store-and-retrieve/set-up', 'Set up（设置）'],
+                ['/get-started/store-and-retrieve/store-data', 'Store data（存储数据）'],
+                ['/get-started/store-and-retrieve/retrieve-data', 'Retrieve data（取回数据）']
               ]
             },
             {
@@ -83,17 +83,17 @@ module.exports = {
               sidebarDepth: 1,
               collapsable: true,
               children: [
-                ['lotus/running-in-the-cloud', 'Running in the Cloud'],
-                ['lotus/installation', 'Local Installation'],
-                ['lotus/switch-networks', 'Switch networks'],
-                ['lotus/chain', 'Chain management'],
-                ['lotus/send-and-receive-fil', 'Send and receive ⨎'],
-                ['lotus/multisig', 'Multi-signature wallets'],
-                ['lotus/ledger', 'Ledger wallet'],
-                ['lotus/upgrades', 'Upgrades'],
-                ['lotus/tips-running-in-china', 'Tips when running in China'],
-                ['lotus/configuration-and-advanced-usage', 'Advanced options'],
-                ['lotus/troubleshooting', 'Troubleshooting']
+                ['lotus/running-in-the-cloud', 'Running in the Cloud（云端运行）'],
+                ['lotus/installation', 'Local Installation（本地安装）'],
+                ['lotus/switch-networks', 'Switch networks（切换网络）'],
+                ['lotus/chain', 'Chain management（区块链管理）'],
+                ['lotus/send-and-receive-fil', 'Send and receive ⨎（转账FIL）'],
+                ['lotus/multisig', 'Multi-signature wallets（多签名钱包）'],
+                ['lotus/ledger', 'Ledger wallet（账本钱包）'],
+                ['lotus/upgrades', 'Upgrades（升级）'],
+                ['lotus/tips-running-in-china', 'Tips when running in China（在中国运行提示）'],
+                ['lotus/configuration-and-advanced-usage', 'Advanced options（高级设置）'],
+                ['lotus/troubleshooting', 'Troubleshooting（故障排除）']
               ]
             },
             'explore-the-network',
@@ -136,13 +136,13 @@ module.exports = {
               sidebarDepth: 2,
               collapsable: false,
               children: [
-                ['lotus/miner-setup', 'Miner setup'],
-                ['lotus/miner-configuration', 'Configuration reference'],
-                ['lotus/miner-upgrades', 'Upgrades'],
-                ['lotus/miner-lifecycle', 'Miner lifecycle'],
-                ['lotus/manage-storage-deals', 'Manage storage deals'],
-                ['lotus/manage-retrieval-deals', 'Manage retrieval deals'],
-                ['lotus/dynamic-retrieval-pricing', 'Dynamic retrieval pricing'],
+                ['lotus/miner-setup', 'Miner setup（矿工设置）'],
+                ['lotus/miner-configuration', 'Configuration reference（引用配置）'],
+                ['lotus/miner-upgrades', 'Upgrades（升级）'],
+                ['lotus/miner-lifecycle', 'Miner lifecycle（矿工生命周期）'],
+                ['lotus/manage-storage-deals', 'Manage storage deals（管理存储交易）'],
+                ['lotus/manage-retrieval-deals', 'Manage retrieval deals（管理检索交易）'],
+                ['lotus/dynamic-retrieval-pricing', 'Dynamic retrieval pricing（动态检索价格）'],
                 ['lotus/custom-storage-layout', 'Custom storage layout'],
                 ['lotus/sector-pledging', 'Sector pledging'],
                 ['lotus/disputer', 'Disputer'],

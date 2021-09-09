@@ -1,5 +1,5 @@
 ---
-title: 'Lotus Miner: configuration reference'
+title: 'Lotus Miner: configuration reference（引用配置）'
 description: 'This guide covers the Lotus Miner configuration files, detailing the meaning of the options contained in them.'
 breadcrumb: 'Configuration reference'
 ---
@@ -12,15 +12,24 @@ The Lotus Miner configutation is created after the [initialization step](miner-s
 
 The _default configuration_ has all the items commented. To customize one of the items, you must remove the leading `#`.
 
+Lotus Miner 配置是在安装过程中的[初始化步骤](miner-setup.md) 之后创建的，并在定义时放置在`~/.lotusminer/config.toml` 或`$LOTUS_MINER_PATH/config.toml` 中。
+
+_default 配置_ 已注释所有项目。 要自定义其中一项，您必须删除前面的 `#`。
+
 ::: tip
 For any configuration changes to take effect, the miner must be [restarted](miner-lifecycle.md).
+
+任何配置修改之后，必须重启矿工进程。
+
 :::
 
 [[TOC]]
 
-## API section
+## API section（API部分）
 
 The API section controls the settings of the [miner API](../../reference/lotus-api.md):
+
+API 部分控制 [miner API](../../reference/lotus-api.md) 的设置：
 
 ```toml
 [API]
@@ -34,11 +43,17 @@ The API section controls the settings of the [miner API](../../reference/lotus-a
 
 As you see, the listen address is bound to the local loopback interface by default. To open access to the miner API for other machines, set this to the IP address of the network interface you want to use. You can also set it to `0.0.0.0` to allow all interfaces. API access is protected by [JWT tokens](../../build/lotus/api-tokens.md), but it should not be open to the internet.
 
+如你所见，监听地址默认绑定到本地环回接口。 要为其他机器打开对矿机 API 的访问，请将其设置为您要使用的网络接口的 IP 地址。 您还可以将其设置为“0.0.0.0”以允许所有接口。 API 访问受 [JWT 令牌](../../build/lotus/api-tokens.md) 保护，但不应向 Internet 开放。
+
 Configure `RemoteListenAddress` to the value that a different node would have to use to reach this API. Usually, it is the miner's IP address and API port, but depending on your setup (proxies, public IPs, etc.), it might be a different IP.
 
-## Libp2p section
+将“RemoteListenAddress”配置为其他节点必须使用才能访问此 API 的值。 通常，它是矿工的 IP 地址和 API 端口，但根据您的设置（代理、公共 IP 等），它可能是不同的 IP。
+
+## Libp2p section（P2P网络部分）
 
 This section configures the miner's embedded Libp2p node. As noted in the [setup instructions](miner-setup.md#connectivity-to-the-miner), it is very important to adjust this section with the miner's public IP and a fixed port:
+
+本节配置矿工的嵌入式 Libp2p 节点。 如[设置说明](miner-setup.md#connectivity-to-the-miner)中所述，用矿工的公网IP和固定端口调整此部分非常重要：
 
 ```toml
 [Libp2p]
@@ -62,9 +77,13 @@ This section configures the miner's embedded Libp2p node. As noted in the [setup
 
 The connection manager will start to prune the existing connections if the number of established crosses the value set for `ConnMgrHigh` until it hits the value set for `ConnMgrLow`. Connections younger than `ConnMgrGrace` will be kept.
 
+如果已建立的连接数超过为 ConnMgrHigh 设置的值，连接管理器将开始断开现有连接，直到达到为 ConnMgrLow 设置的值。 将保留比 ConnMgrGrace 更年轻的连接。
+
 ## Pubsub section
 
 This section controls some Pubsub settings. Pubsub is used to distribute messages in the network:
+
+此部分控制一些 Pubsub 设置。 Pubsub 用于在网络中分发消息：
 
 ```toml
 [Pubsub]
@@ -84,6 +103,8 @@ This section controls some Pubsub settings. Pubsub is used to distribute message
 ## Dealmaking section
 
 This section controls parameters for making storage and retrieval deals:
+
+此部分控制用于进行存储和检索交易的参数：
 
 ```toml
 [Dealmaking]
@@ -121,39 +142,74 @@ This section controls parameters for making storage and retrieval deals:
 
 `ExpectedSealDuration` is an estimate of how long sealing will take and is used to reject deals whose start epoch might be earlier than the expected completion of sealing. It can be estimated by [benchmarking](benchmarks.md) or by [pledging a sector](sector-pledging.md).
 
+`ExpectedSealDuration` 是对密封需要多长时间的估计，用于拒绝时间不合法的交易（开始时间早于预期密封完成时间）。 可以通过 [benchmarking](benchmarks.md) 或 [抵押一个扇区](sector-pledging.md) 来估计。
+
 :::warning
 The final value of `ExpectedSealDuration` should equal `(TIME_TO_SEAL_A_SECTOR + WaitDealsDelay) * 1.5`. This equation ensures that the miner does not commit to having the sector sealed too soon.
+
+`ExpectedSealDuration` 的最终值应该等于 `(TIME_TO_SEAL_A_SECTOR + WaitDealsDelay) * 1.5`。 这个等式确保矿工不会承诺过早密封该扇区。
+
 :::
 
-### Publishing several deals in one message
+### Publishing several deals in one message（在一条消息中发布多笔交易）
 
 The `PublishStorageDeals` message can publish many deals in a single message.
 When a deal is ready to be published, Lotus will wait up to `PublishMsgPeriod`
 for other deals to be ready before sending the `PublishStorageDeals` message.
 
+`PublishStorageDeals` 消息可以在一条消息中发布许多交易。当交易准备好发布时，Lotus 将等待`PublishMsgPeriod`在发送 “PublishStorageDeals” 消息之前准备好其他交易。
+
 However, once `MaxDealsPerPublishMsg` is ready, Lotus will immediately publish all the deals.
 
+然而，一旦 `MaxDealsPerPublishMsg` 准备就绪，Lotus 将立即发布所有交易。
+
 For example, if `PublishMsgPeriod` is 1 hour:
+
+例如，如果 `PublishMsgPeriod` 是 1 小时：
 
 - At 1:00 pm, deal 1 is ready to publish. Lotus will wait until 2:00 pm for other deals to be ready before sending `PublishStorageDeals`.
 - At 1:30 pm, Deal 2 is ready to publish
 - At 1:45 pm, Deal 3 is ready to publish
 - At 2:00pm, lotus publishes Deals 1, 2, and 3 in a single `PublishStorageDeals` message.
 
+----
+
+- 下午 1:00，交易 1 准备发布。在发送“PublishStorageDeals”之前，Lotus 将等到下午 2:00 等待其他交易准备就绪。
+- 下午 1:30，交易 2 准备发布
+- 下午 1:45，交易 3 准备发布
+- 下午 2:00，lotus 在单个 `PublishStorageDeals` 消息中发布交易 1、2 和 3。
+
+
 If `MaxDealsPerPublishMsg` is 2, then in the above example, when deal 2 is ready to be published at 1:30, Lotus would immediately publish Deals 1 & 2 in a single `PublishStorageDeals` message. Deal 3 would be published in a subsequent `PublishStorageDeals` message.
+
+如果 `MaxDealsPerPublishMsg` 为 2，那么在上面的例子中，当交易 2 准备在 1:30 发布时，Lotus 会立即在单个 `PublishStorageDeals` 消息中发布交易 1 和 2。交易 3 将在后续的“PublishStorageDeals”消息中发布。
 
 > If any of the deals in the `PublishStorageDeals` fails validation upon execution, or if the start epoch has passed, all deals will fail to be published.
 
-## Using filters for fine-grained storage and retrieval deal acceptance
+> 如果 `PublishStorageDeals` 中的任何交易在执行时未通过验证，或者如果开始时期已经过去，则所有交易都将无法发布。
+
+
+## Using filters for fine-grained storage and retrieval deal acceptance（使用过滤器进行细粒度的存储和检索交易）
 
 Your use case might demand very precise and dynamic control over a combination of deal parameters.
 
+您的用例可能需要对交易参数组合进行非常精确和动态的控制。
+
 Lotus provides two IPC hooks allowing you to name a command to execute for every deal before the miner accepts it:
+
+Lotus 提供了两个 IPC 钩子，允许您在矿工接受之前为每笔交易命名要执行的命令：
 
 - `Filter` for storage deals.
 - `RetrievalFilter` for retrieval deals.
 
+----
+
+- 存储交易的`过滤器`。
+- 用于检索交易的`RetrievalFilter`。
+
 The executed command receives a JSON representation of the deal parameters on standard input, and upon completion, its exit code is interpreted as:
+
+执行的命令在标准输入上接收交易参数的 JSON 表示，完成后，其退出代码被解释为：
 
 - `0`: success, proceed with the deal.
 - `non-0`: failure, reject the deal.
@@ -161,9 +217,16 @@ The executed command receives a JSON representation of the deal parameters on st
 The most trivial filter rejecting any retrieval deal would be something like:
 `RetrievalFilter = "/bin/false"`. `/bin/false` is binary that immediately exits with a code of `1`.
 
+拒绝任何检索交易的最简单的过滤器是这样的：
+`RetrievalFilter = "/bin/false"`。 `/bin/false` 是二进制文件，它立即以代码 1 退出。
+
 [This Perl script](https://gist.github.com/ribasushi/53b7383aeb6e6f9b030210f4d64351d5/9bd6e898f94d20b50e7c7586dc8b8f3a45dab07c#file-dealfilter-pl) lets the miner deny specific clients and only accept deals that are set to start relatively soon.
 
+上面的脚本让矿工拒绝制定的客户端，只接受尽快开始的交易。
+
 You can also use a third party content policy framework like `bitscreen` by Murmuration Labs:
+
+您还可以使用第三方内容策略框架，例如 Murmuration Labs 的“bitscreen”：
 
 ```sh
 # grab filter program
@@ -174,9 +237,11 @@ Filter = "/path/to/go/bin/bitscreen"
 RetrievalFilter = "/path/to/go/bin/bitscreen"
 ```
 
-## Sealing section
+## Sealing section（密封部分）
 
 This section controls some of the behavior around sector sealing:
+
+这部分配置控制关于扇区密封的一些行为。
 
 ```toml
 [Sealing]
@@ -236,6 +301,8 @@ This section controls some of the behavior around sector sealing:
 ### PreCommitSectorsBatch
 
 `PreCommitSectorsBatch` introduced by [FIP-0008 ](https://github.com/filecoin-project/FIPs/blob/master/FIPS/fip-0008.md) supports a miner to pre-commit a number of sectors at once. 
+
+`PreCommitSectorsBatch` 支持一个矿工对一批扇区进行pre-commit。
 
 In lotus v1.10.0 and up, if `BatchPreCommit` is set to false, pre-commitments will be sent to the chain via `PreCommitSector` messages once they are ready. If `BatchPreCommit` is set to true, lotus will batch pre-commitments until any of `MaxPreCommitBatch`, `PreCommitBatchWait` or `PreCommitBatchSlack` is hit:
 - `MaxPreCommitBatch` is the maximum amount of sectors' pre-commitments to batch in one `PreCommitSectorsBatch` message. According to FIP-0008, this values is up to 256.

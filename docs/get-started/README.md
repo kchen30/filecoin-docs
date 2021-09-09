@@ -1,6 +1,6 @@
 ---
-title: 'Get started'
-description: 'The Filecoin Network is made with miners and clients. They make deals and contribute to maintaining the Filecoin blockchain, obtaining storage services, and receiving rewards in the process. This section walks your through how to get started, build a node, and create a simple application.'
+title: 'Get started（快速入门）'
+description: 'The Filecoin Network is made with miners and clients. They make deals and contribute to maintaining the Filecoin blockchain, obtaining storage services, and receiving rewards in the process. This section walks your through how to get started, build a node, and create a simple application.（Filecoin由矿工和用户组成。他们完成交易、维护区块链、获得存储服务，并在过程中获得奖励。本节将引导您如何开始、构建节点和创建简单的应用程序）'
 breadcrumb: ''
 ---
 
@@ -11,19 +11,28 @@ breadcrumb: ''
 :::tip Quick started guides you should try first 
 Working with blockchains is difficult, and the inherent complexity of blockchains can be overwhelming for new developers. If you're not sure where to begin, we recommend you take a look at these sections before diving into more complex parts of Filecoin:
 
+**您应该先尝试的快速入门指南**
+
+对于新开发来说，区块链技术的复杂性会让入门变的非常困难。如果您不确定从哪里开始，我们建议您在深入了解Filecoin之前，先看以下这部分。
+
 | Lotus | Store and retrieve |
 | --- | --- |
-| Want to set up a fully-featured Lotus deployment? Start by [spinning up a Lotus full-node in just a few minutes →](./lotus) | Learn how to [store and retrieve data using the Filecoin network →](./store-and-retrieve)
+| Want to set up a fully-featured Lotus deployment? Start by [spinning up a Lotus full-node in just a few minutes →](./lotus) | Learn how to [store and retrieve data using the Filecoin network →](./store-and-retrieve) |
+| 如何部署一个全功能的Lotus节点？开始 [几分钟启动一个Lotus全节点 →](./lotus) | 学习如何 [使用Filecoin网络存储和检索数据 →](./store-and-retrieve)
 :::
 
-## Become familiar with the concepts
+## Become familiar with the concepts（熟悉概念）
 
 - Read [How Filecoin Works](../about-filecoin/how-filecoin-works.md) and [IPFS and Filecoin](../about-filecoin/ipfs-and-filecoin.md).
 - Complete the [Protoschool tutorial](https://proto.school/verifying-storage-on-filecoin/) to get a closer, practical look.
 - Check out the [existing networks](https://network.filecoin.io).
 - Explore the mainnet using one of the [available block explorers](explore-the-network.md). Discover the blocks, the messages, the scoreboards for miners. Watch the self-adjusting base fee, the deals, and all the things tracked by the chain.
+- 阅读 [Filecoin工作原理](../about-filecoin/how-filecoin-works.md) and [IPFS 和 Filecoin](../about-filecoin/ipfs-and-filecoin.md).
+- 获得更深入、实用的了解可以完成 [Protoschool 教程](https://proto.school/verifying-storage-on-filecoin/) 
+- 查看 [现有Filecoin网络](https://network.filecoin.io).
+- 使用 [区块链浏览器](explore-the-network.md)查看Filecoin主网。 浏览区块、消息、矿工分数榜。查看交易、费用、以及区块链上的所有内容。
 
-## Store content on Filecoin
+## Store content on Filecoin（在Filecoin上存储内容）
 
 :::tip
 Looking for an easy way to store and access your files on Filecoin? Use one of the community built tools and services to get started. [Take a look now →](../store/README.md)
